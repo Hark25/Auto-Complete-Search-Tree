@@ -1,0 +1,112 @@
+MVP — core data structure & basics
+
+Implement a basic Trie (prefix tree) with insert and prefix-search capability.
+
+Add exact search and delete operations for words/phrases in the trie.
+
+Store and update a frequency counter for each word (for ranking).
+
+Implement a simple autocomplete function that returns all completions for a prefix.
+
+Add a limit k to autocomplete (return top-k results by frequency).
+
+Build a basic command-line interface or REPL to interactively test queries.
+
+
+Core ranking & UX features
+
+Implement combined ranking by frequency and recency (e.g., weighted score).
+
+Add a per-node top-k cache to return suggestions in O(m) without full traversal.
+
+Implement tie-breaking rules (alphabetical, length, recency) for deterministic output.
+
+Support phrase suggestions (multi-word entries) and handle spaces in prefixes.
+
+Add case-insensitive matching and a normalization pipeline (trim, lowercase, strip punctuation).
+
+
+Persistence & data management
+
+Add bulk data loader to import large datasets (word + frequency + timestamp).
+
+Implement on-disk persistence (save/load the dictionary and metadata efficiently).
+
+Add incremental snapshotting / checkpointing to avoid rebuilds on restart.
+
+Implement a merge/import operation to combine external frequency updates.
+
+
+API & integration
+
+Expose an HTTP API endpoint that serves autocomplete queries (q, k) and returns JSON suggestions.
+
+Add an update endpoint for recording user selections (to update frequency/recency).
+
+Implement basic auth / API key protection for write endpoints.
+
+Add a small client demonstration (curl or minimal UI) that calls the API.
+
+
+Concurrency & reliability
+
+Make updates thread-safe / use locks or concurrent data structures for in-memory trie updates.
+
+Implement batching of updates (apply user-selection updates in batches to reduce contention).
+
+Add graceful shutdown that flushes in-memory updates to disk.
+
+
+Testing, benchmarking & correctness
+
+Create unit tests for trie ops, ranking, persistence, and API behaviors.
+
+Add property-based tests or fuzzing for edge cases (empty prefix, very long prefix, non-ASCII).
+
+Implement benchmarking scripts to measure latency and throughput for various dataset sizes (1k, 100k, 1M).
+
+Establish SLO targets (e.g., 95th-percentile latency < X ms) and track results.
+
+
+Memory, speed & scale optimizations
+
+Replace naive trie with compressed trie / radix tree if memory is a problem.
+
+Add ternary search tree or other space-optimized DS option and compare tradeoffs.
+
+Implement per-node heap / bounded priority list instead of full lists to keep only top-k.
+
+Add lazy loading or sharding for huge datasets to keep memory bounded.
+
+
+Advanced search features (optional, high-impact)
+
+Implement fuzzy matching (allow 1–2 edit-distance candidates) with efficient pruning.
+
+Add prefix weighting / user-personalization (per-user boosts based on history).
+
+Implement context-aware suggestions (use prior query term to bias results).
+
+Add session-based recency so a user’s recent selections influence their suggestions.
+
+
+Instrumentation, monitoring & deployment
+
+Add metrics and logging: request latency histogram, QPS, error rates, cache hit rate.
+
+Add healthcheck endpoints and simple monitoring dashboards.
+
+Containerize and provide a deployment checklist (start, stop, restore snapshot, scale).
+
+Add load testing scenario that simulates realistic traffic and shows scaling behavior.
+
+
+Polish, documentation & interview-ready deliverables
+
+Write concise README describing project architecture, design trade-offs, and how to run benchmarks.
+
+Prepare a one-page design summary that explains choices (data structure, ranking, persistence, scalability).
+
+Create a short demo script (happy path + edge case) you can run in interviews.
+
+Prepare a list of possible improvements and trade-offs (what you’d do next given more time/resources).
