@@ -109,6 +109,37 @@ class Trie:
             current.count += 1
             return True
         return False
+    
+    def auto_complete(self, prefix):
+        current = self.root
+        word = prefix
 
+        # Helper function inside auto_complete
+        def count(prefix):
+            if not isinstance(prefix, str):
+                raise TypeError("prefix_search expects a string")
 
-        
+            current = self.root
+            for char in prefix:
+                if char in current.children:
+                    current = current.children[char]
+                else:
+                    return []  # prefix not found
+
+            results = []
+            def dfs(node, path):
+                if node.is_end_of_word:
+                    results.append((prefix + path, node.count))
+                for char, child_node in node.children.items():
+                    dfs(child_node, path + char)
+
+            dfs(current, "")
+            return results
+
+        # main autocomplete logic
+        if not isinstance(prefix, str):
+            raise TypeError("auto_complete expects a string")
+    
+        words = count(word)   # ✅ only pass prefix string
+        words.sort(key=lambda x: x[1], reverse=True)
+        return words[:3]

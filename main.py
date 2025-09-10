@@ -19,3 +19,13 @@ print(trie.exact_search("fish"))   # False
 print(trie.exact_search("dog"))  # True
 trie.delete("dog")
 print(trie.exact_search("dog")) # False
+
+trie.increment_count("cat")
+trie.increment_count("car")
+trie.increment_count("cat")
+trie.increment_count("cat")
+trie.increment_count("car")
+trie.increment_count("cart")
+
+print(trie.auto_complete("ca"))
+
