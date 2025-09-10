@@ -1,31 +1,56 @@
 from trie import Trie
 
-trie = Trie()
-trie.insert("cat")
-trie.insert("car")
-trie.insert("cart")
-trie.insert("dog")
+def main():
+    trie = Trie()
+    print("Simple Trie REPL. Type 'help' for commands, 'exit' to quit.")
 
-print(trie.prefix_search("ca"))  # ['cat', 'car', 'cart']
-print(trie.prefix_search("do"))  # ['dog']
-print(trie.prefix_search("z"))   # []
+    while True:
+        command = input("> ").strip().split(" ", 1)  # split into [cmd, arg]
+        cmd = command[0].lower()
 
-print(trie.exact_search("cat"))   # True
-print(trie.exact_search("ca"))    # False 
-print(trie.exact_search("car"))   # True
-print(trie.exact_search("cart"))  # True
-print(trie.exact_search("fish"))   # False
+        if cmd == "exit":
+            print("Goodbye!")
+            break
 
-print(trie.exact_search("dog"))  # True
-trie.delete("dog")
-print(trie.exact_search("dog")) # False
+        elif cmd == "help":
+            print("Commands:")
+            print("  insert <word>         - Insert a word into the trie")
+            print("  search <word>         - Check if a word exists (exact search)")
+            print("  autocomplete <prefix> - Get top 3 completions for a prefix")
+            print("  count <word>          - Show how many times a word was used")
+            print("  use <word>            - Increment usage count for a word")
+            print("  exit                  - Quit the program")
 
-trie.increment_count("cat")
-trie.increment_count("car")
-trie.increment_count("cat")
-trie.increment_count("cat")
-trie.increment_count("car")
-trie.increment_count("cart")
+        elif cmd == "insert" and len(command) > 1:
+            word = command[1]
+            trie.insert(word)
+            print(f'Inserted "{word}".')
 
-print(trie.auto_complete("ca"))
+        elif cmd == "search" and len(command) > 1:
+            word = command[1]
+            found = trie.exact_search(word)
+            print(f'"{word}" found? {found}')
+
+        elif cmd == "autocomplete" and len(command) > 1:
+            prefix = command[1]
+            results = trie.auto_complete(prefix)
+            print("Completions:", results)
+
+        elif cmd == "count" and len(command) > 1:
+            word = command[1]
+            print(f'Usage count for "{word}": {trie.count(word)}')
+
+        elif cmd == "use" and len(command) > 1:
+            word = command[1]
+            if trie.increment_count(word):
+                print(f'Incremented usage for "{word}".')
+            else:
+                print(f'"{word}" not found in trie.')
+
+        else:
+            print("Unknown command. Type 'help' for commands.")
+
+if __name__ == "__main__":
+    main()
+
 
