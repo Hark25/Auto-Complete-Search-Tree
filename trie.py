@@ -1,9 +1,12 @@
+import time, math
+
 # Node class for data
 class Node:
     def __init__(self):
-        self.children = {}          # char → Node
-        self.is_end_of_word = False # indicates if node is end of a word
-        self.count = 0             #number of times word is used (will be used later)
+        self.children = {}              # char → Node
+        self.is_end_of_word = False     # indicates if node is end of a word
+        self.count = 0                  # number of times word is used
+        self.last_used = time.time()    # timestamp of last usage
 
 # Trie class for functions
 class Trie:
@@ -22,8 +25,10 @@ class Trie:
                 current.children[char] = Node()
             current = current.children[char]
 
+        #update node properties
         current.is_end_of_word = True
         current.count += 1
+        current.last_used = time.time()
 
     #Prefix search Function
     def prefix_search(self, prefix):
@@ -107,12 +112,20 @@ class Trie:
     
         if current.is_end_of_word:
             current.count += 1
+            current.last_used = time.time()
             return True
         return False
     
     def auto_complete(self, prefix):
         current = self.root
         word = prefix
+
+        #helper to make a score
+        def score(node, alpha=0.1, beta=0.5):
+            freq = math.log(node.count + 1)
+            age = time.time() - node.last_used
+            recency_score = 1 / ( 1 + age )
+            return alpha * freq + beta * recency_score
 
         # Helper function inside auto_complete
         def count(prefix):
@@ -129,7 +142,7 @@ class Trie:
             results = []
             def dfs(node, path):
                 if node.is_end_of_word:
-                    results.append((prefix + path, node.count))
+                    results.append((prefix + path, score(node)))
                 for char, child_node in node.children.items():
                     dfs(child_node, path + char)
 
@@ -142,4 +155,4 @@ class Trie:
     
         words = count(word)   # ✅ only pass prefix string
         words.sort(key=lambda x: x[1], reverse=True)
-        return [w for w, c in words][:3]
+        return [w for w, c in words][:1]

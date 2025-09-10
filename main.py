@@ -1,51 +1,39 @@
+from prompt_toolkit import PromptSession
+from prompt_toolkit.completion import Completer, Completion
 from trie import Trie
 
-def main():
-    trie = Trie()
-    print("Simple Trie REPL. Type 'help' for commands, 'exit' to quit.")
+trie = Trie()
 
-    while True:
-        command = input("> ").strip().split(" ", 1)  # split into [cmd, arg]
-        cmd = command[0].lower()
+# preload some words
+for w in ["i", "love", "cats", "dogs", "icecream"]:
+    trie.insert(w)
 
-        if cmd == "exit":
-            print("Goodbye!")
-            break
+class TrieCompleter(Completer):
+    def get_completions(self, document, complete_event):
+        text = document.get_word_before_cursor()
+        # auto_complete returns list of words
+        for w in trie.auto_complete(text):
+            yield Completion(w, start_position=-len(text))
 
-        elif cmd == "help":
-            print("Commands:")
-            print("  insert <word>         - Insert a word into the trie")
-            print("  search <word>         - Check if a word exists (exact search)")
-            print("  autocomplete <prefix> - Get top 3 completions for a prefix")
-            print("  use <word>            - Increment usage count for a word")
-            print("  exit                  - Quit the program")
+session = PromptSession(completer=TrieCompleter())
 
-        elif cmd == "insert" and len(command) > 1:
-            word = command[1]
-            trie.insert(word)
-            print(f'Inserted "{word}".')
+print("Start typing. Autocomplete appears automatically. Ctrl+C to exit.")
 
-        elif cmd == "search" and len(command) > 1:
-            word = command[1]
-            found = trie.exact_search(word)
-            print(f'"{word}" found? {found}')
+while True:
+    try:
+        line = session.prompt("> ")  # user types a full line
+        print(f"You typed: {line}")
 
-        elif cmd == "autocomplete" and len(command) > 1:
-            prefix = command[1]
-            results = trie.auto_complete(prefix)
-            print("Completions:", results)
-
-        elif cmd == "use" and len(command) > 1:
-            word = command[1]
-            if trie.increment_count(word):
-                print(f'Incremented usage for "{word}".')
+        # split the line into words and add/increment in trie
+        for word in line.split():
+            if trie.exact_search(word):
+                trie.increment_count(word)
             else:
-                print(f'"{word}" not found in trie.')
+                trie.insert(word)
+                trie.increment_count(word)  # first usage
 
-        else:
-            print("Unknown command. Type 'help' for commands.")
-
-if __name__ == "__main__":
-    main()
+    except KeyboardInterrupt:
+        print("\nBye!")
+        break
 
 
