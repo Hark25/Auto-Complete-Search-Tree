@@ -17,7 +17,6 @@ def main():
             print("  insert <word>         - Insert a word into the trie")
             print("  search <word>         - Check if a word exists (exact search)")
             print("  autocomplete <prefix> - Get top 3 completions for a prefix")
-            print("  count <word>          - Show how many times a word was used")
             print("  use <word>            - Increment usage count for a word")
             print("  exit                  - Quit the program")
 
@@ -35,10 +34,6 @@ def main():
             prefix = command[1]
             results = trie.auto_complete(prefix)
             print("Completions:", results)
-
-        elif cmd == "count" and len(command) > 1:
-            word = command[1]
-            print(f'Usage count for "{word}": {trie.count(word)}')
 
         elif cmd == "use" and len(command) > 1:
             word = command[1]

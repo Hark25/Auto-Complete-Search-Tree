@@ -142,4 +142,4 @@ class Trie:
     
         words = count(word)   # ✅ only pass prefix string
         words.sort(key=lambda x: x[1], reverse=True)
-        return words[:3]
+        return [w for w, c in words][:3]
