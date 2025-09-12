@@ -7,13 +7,46 @@ class Node:
         self.is_end_of_word = False     # indicates if node is end of a word
         self.count = 0                  # number of times word is used
         self.last_used = time.time()    # timestamp of last usage
+        self.cache = []                 # cache for top-k words
 
-# Trie class for functions
+# functions for Trie to use
+
+# Compute score
+def score(node, alpha=0.3, beta=0.5):
+    freq = math.log(node.count + 1)             # log frequency to lower impact of high counts
+    age = time.time() - node.last_used          # time since last used
+    recency_score = 1 / ( 1 + age )             # recency score, more recent = higher score
+    return alpha * freq + beta * recency_score  # return weighted score.
+
+# update cache
+def update_cache(node, word, k=5, trie_root=None):
+    # Helper to get node for a word
+    def get_node_for_word(root, word):
+        current = root
+        for char in word:
+            if char not in current.children:
+                return None
+            current = current.children[char]
+        return current if current.is_end_of_word else None
+
+    # Build list of (word, score) for all words in cache + new word
+    words = set(node.cache)
+    words.add(word)
+    scored = []
+    for w in words:
+        n = get_node_for_word(trie_root if trie_root else node, w)
+        if n:
+            scored.append((w, score(n)))
+    # Sort and keep top k
+    scored.sort(key=lambda x: x[1], reverse=True)
+    node.cache = [w for w, s in scored[:k]]
+
+# Trie class 
 class Trie:
     #initialize root
     def __init__(self):
         self.root = Node()
-
+    
     # Insert a word into the trie
     def insert(self, word):
         if not isinstance(word, str):
@@ -29,6 +62,12 @@ class Trie:
         current.is_end_of_word = True
         current.count += 1
         current.last_used = time.time()
+
+        # update cache for each node along the path
+        node = self.root
+        for c in word:
+            update_cache(node, word, trie_root=self.root)
+            node = node.children[c]
 
     #Prefix search Function
     def prefix_search(self, prefix):
@@ -74,8 +113,9 @@ class Trie:
         if not isinstance(word, str):
             raise TypeError("delete expects a string")
         
+        # Helper functio for recursion
         def _delete(node, word, depth):
-            if node is None:\
+            if node is None:
                 return False
             
             if depth == len(word):
@@ -113,19 +153,19 @@ class Trie:
         if current.is_end_of_word:
             current.count += 1
             current.last_used = time.time()
+
+            # Update cache along the path
+            node = self.root
+            for c in word:
+                update_cache(node, word, trie_root=self.root)
+                node = node.children[c]
+
             return True
         return False
     
     def auto_complete(self, prefix):
         current = self.root
         word = prefix
-
-        #helper to make a score
-        def score(node, alpha=0.1, beta=0.5):
-            freq = math.log(node.count + 1)
-            age = time.time() - node.last_used
-            recency_score = 1 / ( 1 + age )
-            return alpha * freq + beta * recency_score
 
         # Helper function inside auto_complete
         def count(prefix):
@@ -147,12 +187,24 @@ class Trie:
                     dfs(child_node, path + char)
 
             dfs(current, "")
+            
             return results
-
+        
         # main autocomplete logic
-        if not isinstance(prefix, str):
-            raise TypeError("auto_complete expects a string")
+        if(current.cache == []):
+            
+            if not isinstance(prefix, str):
+                raise TypeError("auto_complete expects a string")
     
-        words = count(word)   # ✅ only pass prefix string
-        words.sort(key=lambda x: x[1], reverse=True)
-        return [w for w, c in words][:1]
+            words = count(word)  
+            words.sort(key=lambda x: x[1], reverse=True)
+            update_cache(current, word)
+            return [w for w, c in words][:1]
+        else:
+            current = self.root
+            for char in prefix:
+                if char not in current.children:
+                    return []
+                current = current.children[char]
+                
+            return current.cache
