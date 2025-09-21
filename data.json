@@ -1,0 +1,682 @@
+[
+  {
+    "word": "the",
+    "count": 20,
+    "timestamp": 1758408711.8053107
+  },
+  {
+    "word": "they",
+    "count": 18,
+    "timestamp": 1758408604.6446528
+  },
+  {
+    "word": "they are great",
+    "count": 2,
+    "timestamp": 1758408604.6446528
+  },
+  {
+    "word": "there",
+    "count": 13,
+    "timestamp": 0.0
+  },
+  {
+    "word": "their",
+    "count": 13,
+    "timestamp": 0.0
+  },
+  {
+    "word": "them",
+    "count": 8,
+    "timestamp": 0.0
+  },
+  {
+    "word": "then",
+    "count": 7,
+    "timestamp": 0.0
+  },
+  {
+    "word": "these",
+    "count": 5,
+    "timestamp": 0.0
+  },
+  {
+    "word": "that",
+    "count": 32,
+    "timestamp": 1758408607.991182
+  },
+  {
+    "word": "that is good",
+    "count": 3,
+    "timestamp": 1758408607.991182
+  },
+  {
+    "word": "than",
+    "count": 7,
+    "timestamp": 0.0
+  },
+  {
+    "word": "thank",
+    "count": 4,
+    "timestamp": 1758408683.3992786
+  },
+  {
+    "word": "thank you",
+    "count": 2,
+    "timestamp": 1758408609.3685546
+  },
+  {
+    "word": "thanks",
+    "count": 2,
+    "timestamp": 1758408697.9382083
+  },
+  {
+    "word": "this",
+    "count": 19,
+    "timestamp": 0.0
+  },
+  {
+    "word": "think",
+    "count": 6,
+    "timestamp": 0.0
+  },
+  {
+    "word": "to",
+    "count": 40,
+    "timestamp": 1758408711.8053107
+  },
+  {
+    "word": "time",
+    "count": 9,
+    "timestamp": 0.0
+  },
+  {
+    "word": "take",
+    "count": 8,
+    "timestamp": 0.0
+  },
+  {
+    "word": "two",
+    "count": 6,
+    "timestamp": 0.0
+  },
+  {
+    "word": "be",
+    "count": 42,
+    "timestamp": 0.0
+  },
+  {
+    "word": "because",
+    "count": 5,
+    "timestamp": 0.0
+  },
+  {
+    "word": "but",
+    "count": 18,
+    "timestamp": 0.0
+  },
+  {
+    "word": "by",
+    "count": 17,
+    "timestamp": 0.0
+  },
+  {
+    "word": "back",
+    "count": 6,
+    "timestamp": 0.0
+  },
+  {
+    "word": "of",
+    "count": 37,
+    "timestamp": 0.0
+  },
+  {
+    "word": "on",
+    "count": 24,
+    "timestamp": 0.0
+  },
+  {
+    "word": "one",
+    "count": 14,
+    "timestamp": 0.0
+  },
+  {
+    "word": "only",
+    "count": 7,
+    "timestamp": 0.0
+  },
+  {
+    "word": "or",
+    "count": 15,
+    "timestamp": 0.0
+  },
+  {
+    "word": "out",
+    "count": 12,
+    "timestamp": 0.0
+  },
+  {
+    "word": "our",
+    "count": 6,
+    "timestamp": 0.0
+  },
+  {
+    "word": "other",
+    "count": 7,
+    "timestamp": 0.0
+  },
+  {
+    "word": "over",
+    "count": 7,
+    "timestamp": 0.0
+  },
+  {
+    "word": "a",
+    "count": 34,
+    "timestamp": 0.0
+  },
+  {
+    "word": "an",
+    "count": 15,
+    "timestamp": 0.0
+  },
+  {
+    "word": "and",
+    "count": 35,
+    "timestamp": 0.0
+  },
+  {
+    "word": "any",
+    "count": 5,
+    "timestamp": 0.0
+  },
+  {
+    "word": "as",
+    "count": 21,
+    "timestamp": 0.0
+  },
+  {
+    "word": "at",
+    "count": 19,
+    "timestamp": 0.0
+  },
+  {
+    "word": "all",
+    "count": 14,
+    "timestamp": 0.0
+  },
+  {
+    "word": "also",
+    "count": 6,
+    "timestamp": 0.0
+  },
+  {
+    "word": "about",
+    "count": 12,
+    "timestamp": 0.0
+  },
+  {
+    "word": "after",
+    "count": 6,
+    "timestamp": 0.0
+  },
+  {
+    "word": "are",
+    "count": 6,
+    "timestamp": 1758408704.139695
+  },
+  {
+    "word": "are you having fun",
+    "count": 2,
+    "timestamp": 1758408704.139695
+  },
+  {
+    "word": "am",
+    "count": 4,
+    "timestamp": 1758408706.284689
+  },
+  {
+    "word": "i",
+    "count": 32,
+    "timestamp": 1758408706.284689
+  },
+  {
+    "word": "in",
+    "count": 33,
+    "timestamp": 0.0
+  },
+  {
+    "word": "into",
+    "count": 8,
+    "timestamp": 0.0
+  },
+  {
+    "word": "it",
+    "count": 27,
+    "timestamp": 0.0
+  },
+  {
+    "word": "its",
+    "count": 7,
+    "timestamp": 0.0
+  },
+  {
+    "word": "it's",
+    "count": 2,
+    "timestamp": 1758408697.9382083
+  },
+  {
+    "word": "it's going good thanks",
+    "count": 2,
+    "timestamp": 1758408697.9382083
+  },
+  {
+    "word": "if",
+    "count": 12,
+    "timestamp": 0.0
+  },
+  {
+    "word": "i am good",
+    "count": 2,
+    "timestamp": 1758408590.7305832
+  },
+  {
+    "word": "i am doing well thank you",
+    "count": 2,
+    "timestamp": 1758408683.3992786
+  },
+  {
+    "word": "i know thank you",
+    "count": 2,
+    "timestamp": 1758408597.766423
+  },
+  {
+    "word": "is",
+    "count": 3,
+    "timestamp": 1758408607.991182
+  },
+  {
+    "word": "im",
+    "count": 2,
+    "timestamp": 1758408711.8053107
+  },
+  {
+    "word": "im going to the moon soon",
+    "count": 2,
+    "timestamp": 1758408711.8053107
+  },
+  {
+    "word": "have",
+    "count": 29,
+    "timestamp": 0.0
+  },
+  {
+    "word": "having",
+    "count": 2,
+    "timestamp": 1758408704.139695
+  },
+  {
+    "word": "he",
+    "count": 22,
+    "timestamp": 0.0
+  },
+  {
+    "word": "her",
+    "count": 16,
+    "timestamp": 0.0
+  },
+  {
+    "word": "hello",
+    "count": 2,
+    "timestamp": 1758408588.4998312
+  },
+  {
+    "word": "hello how are you",
+    "count": 2,
+    "timestamp": 1758408588.4998312
+  },
+  {
+    "word": "his",
+    "count": 18,
+    "timestamp": 0.0
+  },
+  {
+    "word": "him",
+    "count": 9,
+    "timestamp": 0.0
+  },
+  {
+    "word": "how",
+    "count": 10,
+    "timestamp": 1758408717.3172364
+  },
+  {
+    "word": "how are the kids",
+    "count": 2,
+    "timestamp": 1758408601.851506
+  },
+  {
+    "word": "hows",
+    "count": 2,
+    "timestamp": 1758408690.9049866
+  },
+  {
+    "word": "hows the job going",
+    "count": 2,
+    "timestamp": 1758408690.9049866
+  },
+  {
+    "word": "for",
+    "count": 26,
+    "timestamp": 0.0
+  },
+  {
+    "word": "from",
+    "count": 17,
+    "timestamp": 0.0
+  },
+  {
+    "word": "first",
+    "count": 6,
+    "timestamp": 0.0
+  },
+  {
+    "word": "fun",
+    "count": 2,
+    "timestamp": 1758408704.139695
+  },
+  {
+    "word": "no",
+    "count": 9,
+    "timestamp": 0.0
+  },
+  {
+    "word": "not",
+    "count": 25,
+    "timestamp": 0.0
+  },
+  {
+    "word": "now",
+    "count": 7,
+    "timestamp": 0.0
+  },
+  {
+    "word": "new",
+    "count": 5,
+    "timestamp": 0.0
+  },
+  {
+    "word": "with",
+    "count": 23,
+    "timestamp": 0.0
+  },
+  {
+    "word": "will",
+    "count": 14,
+    "timestamp": 0.0
+  },
+  {
+    "word": "we",
+    "count": 16,
+    "timestamp": 0.0
+  },
+  {
+    "word": "well",
+    "count": 8,
+    "timestamp": 1758408683.3992786
+  },
+  {
+    "word": "well how are you",
+    "count": 2,
+    "timestamp": 1758408674.5825694
+  },
+  {
+    "word": "would",
+    "count": 13,
+    "timestamp": 0.0
+  },
+  {
+    "word": "work",
+    "count": 6,
+    "timestamp": 0.0
+  },
+  {
+    "word": "wonderfull",
+    "count": 2,
+    "timestamp": 1758408717.3172364
+  },
+  {
+    "word": "what",
+    "count": 13,
+    "timestamp": 0.0
+  },
+  {
+    "word": "who",
+    "count": 12,
+    "timestamp": 0.0
+  },
+  {
+    "word": "which",
+    "count": 11,
+    "timestamp": 0.0
+  },
+  {
+    "word": "when",
+    "count": 10,
+    "timestamp": 0.0
+  },
+  {
+    "word": "way",
+    "count": 5,
+    "timestamp": 0.0
+  },
+  {
+    "word": "want",
+    "count": 5,
+    "timestamp": 0.0
+  },
+  {
+    "word": "you",
+    "count": 27,
+    "timestamp": 1758408704.139695
+  },
+  {
+    "word": "your",
+    "count": 8,
+    "timestamp": 0.0
+  },
+  {
+    "word": "year",
+    "count": 8,
+    "timestamp": 0.0
+  },
+  {
+    "word": "yes",
+    "count": 2,
+    "timestamp": 1758408706.284689
+  },
+  {
+    "word": "yes i am",
+    "count": 2,
+    "timestamp": 1758408706.284689
+  },
+  {
+    "word": "do",
+    "count": 20,
+    "timestamp": 0.0
+  },
+  {
+    "word": "doing",
+    "count": 2,
+    "timestamp": 1758408683.3992786
+  },
+  {
+    "word": "day",
+    "count": 5,
+    "timestamp": 0.0
+  },
+  {
+    "word": "say",
+    "count": 16,
+    "timestamp": 0.0
+  },
+  {
+    "word": "she",
+    "count": 15,
+    "timestamp": 0.0
+  },
+  {
+    "word": "so",
+    "count": 13,
+    "timestamp": 0.0
+  },
+  {
+    "word": "some",
+    "count": 8,
+    "timestamp": 0.0
+  },
+  {
+    "word": "soon",
+    "count": 2,
+    "timestamp": 1758408711.8053107
+  },
+  {
+    "word": "see",
+    "count": 8,
+    "timestamp": 0.0
+  },
+  {
+    "word": "my",
+    "count": 14,
+    "timestamp": 0.0
+  },
+  {
+    "word": "me",
+    "count": 11,
+    "timestamp": 0.0
+  },
+  {
+    "word": "make",
+    "count": 10,
+    "timestamp": 0.0
+  },
+  {
+    "word": "most",
+    "count": 5,
+    "timestamp": 0.0
+  },
+  {
+    "word": "moon",
+    "count": 2,
+    "timestamp": 1758408711.8053107
+  },
+  {
+    "word": "up",
+    "count": 12,
+    "timestamp": 0.0
+  },
+  {
+    "word": "us",
+    "count": 5,
+    "timestamp": 0.0
+  },
+  {
+    "word": "use",
+    "count": 6,
+    "timestamp": 0.0
+  },
+  {
+    "word": "get",
+    "count": 11,
+    "timestamp": 0.0
+  },
+  {
+    "word": "go",
+    "count": 11,
+    "timestamp": 0.0
+  },
+  {
+    "word": "good",
+    "count": 12,
+    "timestamp": 1758408697.9382083
+  },
+  {
+    "word": "going",
+    "count": 4,
+    "timestamp": 1758408711.8053107
+  },
+  {
+    "word": "give",
+    "count": 5,
+    "timestamp": 0.0
+  },
+  {
+    "word": "great",
+    "count": 2,
+    "timestamp": 1758408604.6446528
+  },
+  {
+    "word": "can",
+    "count": 10,
+    "timestamp": 0.0
+  },
+  {
+    "word": "could",
+    "count": 8,
+    "timestamp": 0.0
+  },
+  {
+    "word": "come",
+    "count": 7,
+    "timestamp": 0.0
+  },
+  {
+    "word": "like",
+    "count": 10,
+    "timestamp": 0.0
+  },
+  {
+    "word": "look",
+    "count": 7,
+    "timestamp": 0.0
+  },
+  {
+    "word": "just",
+    "count": 9,
+    "timestamp": 0.0
+  },
+  {
+    "word": "job",
+    "count": 2,
+    "timestamp": 1758408690.9049866
+  },
+  {
+    "word": "know",
+    "count": 10,
+    "timestamp": 1758408597.766423
+  },
+  {
+    "word": "kids",
+    "count": 2,
+    "timestamp": 1758408601.851506
+  },
+  {
+    "word": "people",
+    "count": 8,
+    "timestamp": 0.0
+  },
+  {
+    "word": "even",
+    "count": 5,
+    "timestamp": 0.0
+  },
+  {
+    "word": "really",
+    "count": 2,
+    "timestamp": 1758408717.3172364
+  },
+  {
+    "word": "really how wonderfull",
+    "count": 2,
+    "timestamp": 1758408717.3172364
+  }
+]

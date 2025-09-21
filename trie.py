@@ -1,4 +1,4 @@
-import time, math
+import time, math, re, string, json 
 
 # Node class for data
 class Node:
@@ -9,7 +9,25 @@ class Node:
         self.last_used = time.time()    # timestamp of last usage
         self.cache = []                 # cache for top-k words
 
-# functions for Trie to use
+# functions for Trie or REPL to use
+
+
+#normalize input
+def normalize(text: str, mode: str = "word") -> str:
+   
+    if not isinstance(text, str):
+        return "normalize requires a string"
+
+    text = text.strip().lower()
+    text = re.sub(r"\s+", " ", text)
+
+    if mode == "word":
+        punct_without_apostrophe = string.punctuation.replace("'", "")
+        pattern = "[" + re.escape(punct_without_apostrophe) + "]"
+        text = re.sub(pattern, "", text)
+
+    return text
+
 
 # Compute score
 def score(node, alpha=0.3, beta=0.5):
@@ -18,8 +36,10 @@ def score(node, alpha=0.3, beta=0.5):
     recency_score = 1 / ( 1 + age )             # recency score, more recent = higher score
     return alpha * freq + beta * recency_score  # return weighted score.
 
+
 # update cache
 def update_cache(node, word, k=5, trie_root=None):
+
     # Helper to get node for a word
     def get_node_for_word(root, word):
         current = root
@@ -29,28 +49,35 @@ def update_cache(node, word, k=5, trie_root=None):
             current = current.children[char]
         return current if current.is_end_of_word else None
 
-    # Build list of (word, score) for all words in cache + new word
+    # Build list of words and score for all words in cache and new word
     words = set(node.cache)
     words.add(word)
     scored = []
+
     for w in words:
         n = get_node_for_word(trie_root if trie_root else node, w)
         if n:
-            scored.append((w, score(n)))
+            scored.append((w, score(n))) 
+
     # Sort and keep top k
     scored.sort(key=lambda x: x[1], reverse=True)
     node.cache = [w for w, s in scored[:k]]
 
-# Trie class 
+
+### Trie class ###
 class Trie:
-    #initialize root
+    ##initialize root
     def __init__(self):
         self.root = Node()
     
-    # Insert a word into the trie
+
+    ## Insert a word into the trie
     def insert(self, word):
         if not isinstance(word, str):
             raise TypeError("insert expects a string")
+        
+        #normalize
+        word = normalize(word, mode='word')
 
         current = self.root
         for char in word:
@@ -69,10 +96,70 @@ class Trie:
             update_cache(node, word, trie_root=self.root)
             node = node.children[c]
 
-    #Prefix search Function
+
+    ## Bulk load function
+    def Bulk_Load(self, filename):
+        
+        #helper to set values to node
+        def _get_node(self, text, mode="word"):
+            text = normalize(text, mode)
+            current = self.root
+            for char in text:
+                if char in current.children:
+                    current = current.children[char]
+                else:
+                    return None
+            return current
+
+        #main bulk load logic
+        with open(filename, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        
+        if not isinstance(data, list):
+            raise ValueError("Bulk load expects a list")
+
+        for entry in data:
+            word = entry["word"]
+            count = int(entry.get("count", 0))
+            ts = float(entry.get("timestamp", time.time()))
+
+            self.insert(word)
+            
+            node = _get_node(self, word, mode='word')
+            if node:
+                node.count = count
+                node.last_used = ts
+    
+
+    #Bulk Save Function
+    def Bulk_save(self, filename):
+
+        data = []
+
+        def dfs(node, path):
+            if node.is_end_of_word:
+                data.append({
+                    "word": path,
+                    "count": node.count,
+                    "timestamp": node.last_used
+                })
+
+            for char, child_node in node.children.items():
+                dfs(child_node, path + char)
+        
+        dfs(self.root, "")
+
+        with open(filename, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+
+
+    ## Prefix search Function
     def prefix_search(self, prefix):
         if not isinstance(prefix, str):
             raise TypeError("prefix_search expects a string")
+
+        #normalize
+        prefix = normalize(prefix, mode='word')
 
         # traverse the prefix
         current = self.root
@@ -94,12 +181,16 @@ class Trie:
         dfs(current, "")
         return results
 
-        #Exact Search Function, returns true if word exists, false otherwise
+
+    ## Exact Search Function, returns true if word exists, false otherwise
     def exact_search(self, word):
-        current = self.root
         if not isinstance(word, str):
             raise TypeError("exact_search expects a string")
-            
+        
+        #normalize
+        word = normalize(word, mode='word')
+
+        current = self.root
         for char in word:
             if char in current.children:
                 current = current.children[char]
@@ -108,11 +199,15 @@ class Trie:
             
         return current.is_end_of_word
     
-    #delete function
+
+    ## delete function (not used in REPL, but useful for testing and future features if needed)
     def delete(self, word):
         if not isinstance(word, str):
             raise TypeError("delete expects a string")
         
+        #normalize
+        word = normalize(word, mode='word')
+
         # Helper functio for recursion
         def _delete(node, word, depth):
             if node is None:
@@ -138,12 +233,16 @@ class Trie:
         
         _delete(self.root, word, 0)
 
-    #increment count functon
-    def increment_count(self, word):
-        current = self.root
 
+    ## increment count functon
+    def increment_count(self, word):
         if not isinstance(word, str):
             raise TypeError("increment_count expects a string")
+
+        current = self.root
+
+        #normalize
+        word = normalize(word, mode='word')
 
         for char in word:
             if char not in current.children:
@@ -163,48 +262,18 @@ class Trie:
             return True
         return False
     
-    def auto_complete(self, prefix):
+
+    ## Main-Autocomplete function
+    def auto_complete(self, prefix):    
         current = self.root
-        word = prefix
 
-        # Helper function inside auto_complete
-        def count(prefix):
-            if not isinstance(prefix, str):
-                raise TypeError("prefix_search expects a string")
+        #normalize
+        prefix = normalize(prefix, mode='word')
 
-            current = self.root
-            for char in prefix:
-                if char in current.children:
-                    current = current.children[char]
-                else:
-                    return []  # prefix not found
-
-            results = []
-            def dfs(node, path):
-                if node.is_end_of_word:
-                    results.append((prefix + path, score(node)))
-                for char, child_node in node.children.items():
-                    dfs(child_node, path + char)
-
-            dfs(current, "")
-            
-            return results
-        
-        # main autocomplete logic
-        if(current.cache == []):
-            
-            if not isinstance(prefix, str):
-                raise TypeError("auto_complete expects a string")
-    
-            words = count(word)  
-            words.sort(key=lambda x: x[1], reverse=True)
-            update_cache(current, word)
-            return [w for w, c in words][:1]
-        else:
-            current = self.root
-            for char in prefix:
-                if char not in current.children:
-                    return []
-                current = current.children[char]
+        #search cache for word
+        for char in prefix:
+            if char not in current.children:
+                return []
+            current = current.children[char]
                 
-            return current.cache
+        return current.cache
